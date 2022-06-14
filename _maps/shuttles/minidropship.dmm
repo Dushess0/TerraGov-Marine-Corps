@@ -3,6 +3,11 @@
 /obj/structure/window/framed/mainship/spaceworthy{
 	icon_state = "col_window10"
 	},
+/obj/machinery/door_control{
+	dir = 1;
+	id = "minidropship_podlock";
+	name = "outer door-control"
+	},
 /turf/open/floor/mainship_hull,
 /area/shuttle/minidropship)
 "b" = (
@@ -22,7 +27,7 @@
 "j" = (
 /obj/machinery/door_control{
 	id = "minidropship_podlock";
-	name = "outer door-control"
+	name = "inner door-control"
 	},
 /turf/open/floor/mainship/orange{
 	dir = 5
@@ -89,6 +94,10 @@
 	},
 /area/shuttle/minidropship)
 "B" = (
+/turf/closed/wall/mainship/outer/reinforced,
+/area/shuttle/minidropship)
+"C" = (
+/obj/machinery/telecomms/relay/preset/telecomms/onboard,
 /turf/closed/wall/mainship/outer/reinforced,
 /area/shuttle/minidropship)
 "E" = (
@@ -257,7 +266,7 @@ E
 b
 T
 y
-B
+C
 U
 E
 "}

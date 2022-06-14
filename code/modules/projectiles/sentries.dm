@@ -249,7 +249,7 @@
 	visible_message(span_notice("The [name] powers up with a warm hum."))
 	set_light_range(initial(light_power))
 	set_light_color(initial(light_color))
-	set_light(SENTRY_LIGHT_POWER)
+	set_light(SENTRY_LIGHT_POWER,SENTRY_LIGHT_POWER)
 	update_icon()
 	START_PROCESSING(SSobj, src)
 	RegisterSignal(gun, COMSIG_MOB_GUN_FIRED, .proc/check_next_shot)
@@ -453,13 +453,6 @@
 	icon = 'icons/Marine/sentry.dmi'
 	default_icon_state = "build_a_sentry"
 	update_icon()
-
-/obj/machinery/deployable/mounted/sentry/buildasentry/examine(mob/user)
-	. = ..()
-	if(!istype(internal_item, /obj/item/weapon/gun/revolver))
-		return
-	to_chat(user, span_notice("It is as if he were still with us.")) //I miss ye already Ocelot.
-
 
 /obj/machinery/deployable/mounted/sentry/buildasentry/update_overlays()
 	. = ..()

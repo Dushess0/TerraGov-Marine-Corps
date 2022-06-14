@@ -18,7 +18,7 @@
 
 /obj/item/factory_refill/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "It has [refill_amount] packages remaining.")
+	. += "It has [refill_amount] packages remaining."
 
 /obj/machinery/outputter
 	name = "Unboxer"
@@ -43,7 +43,7 @@
 
 /obj/machinery/outputter/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, "It is currently facing [dir2text(dir)], and is outputting [initial(production_type.name)]. It has [production_amount_left] resources remaining.")
+	. += "It is currently facing [dir2text(dir)], and is outputting [initial(production_type.name)]. It has [production_amount_left] resources remaining."
 
 /obj/machinery/outputter/wrench_act(mob/living/user, obj/item/I)
 	anchored = !anchored
@@ -150,16 +150,17 @@
 	desc = "A box with round metal plates inside. Used to refill Outputters."
 	refill_type = /obj/item/factory_part/claymore
 
-/obj/item/factory_refill/smartgunner_rifle_box_refill
+/obj/item/factory_refill/smartgunner_minigun_box_refill
 	name = "box of rounded metal plates"
 	desc = "A box with round metal plates inside. Used to refill Outputters."
-	refill_type = /obj/item/factory_part/smartgunner_rifle_box
+	refill_type = /obj/item/factory_part/smartgunner_minigun_box
+	refill_amount = 10
 
 /obj/item/factory_refill/smartgunner_machinegun_magazine_refill
 	name = "box of rounded metal plates"
 	desc = "A box with round metal plates inside. Used to refill Outputters."
 	refill_type = /obj/item/factory_part/smartgunner_machinegun_magazine
-	refill_amount = 20
+	refill_amount = 10
 
 /obj/item/factory_refill/auto_sniper_magazine_refill
 	name = "box of rounded metal plates"

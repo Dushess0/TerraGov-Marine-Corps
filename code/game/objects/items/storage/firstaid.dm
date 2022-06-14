@@ -85,7 +85,6 @@
 /obj/item/storage/firstaid/toxin/fill_firstaid_kit()
 	new /obj/item/healthanalyzer(src)
 	new /obj/item/storage/pill_bottle/dylovene(src)
-	new /obj/item/storage/pill_bottle/peridaxon(src)
 	new /obj/item/storage/pill_bottle/packet/ryetalyn(src)
 	new /obj/item/reagent_containers/hypospray/autoinjector/hypervene(src)
 	new /obj/item/reagent_containers/hypospray/autoinjector/hypervene(src)
@@ -170,6 +169,14 @@
 	new /obj/item/reagent_containers/syringe(src)
 	new /obj/item/reagent_containers/glass/bottle/inaprovaline(src)
 	new /obj/item/reagent_containers/glass/bottle/tricordrazine(src)
+
+/obj/item/storage/syringe_case/injector
+	name = "Autoinjector case"
+	desc = "A case for storing autoinjectors."
+	icon_state = "syringe_case"
+	storage_slots = 3
+	w_class = WEIGHT_CLASS_SMALL
+	can_hold = list(/obj/item/reagent_containers/hypospray/autoinjector)
 
 /obj/item/storage/syringe_case/burn
 	name = "burn syringe case"
@@ -472,7 +479,7 @@
 /obj/item/storage/pill_bottle/meralyne
 	name = "meralyne pill bottle"
 	desc = "Contains pills that heal cuts and bruises, but cause slight pain. Take two to heal faster, but have slightly more pain."
-	icon_state = "pill_canistertall"
+	icon_state = "pill_canistercomplete"
 	greyscale_config = /datum/greyscale_config/pillbottleround
 	pill_type_to_fill = /obj/item/reagent_containers/pill/meralyne
 	greyscale_colors = "#FD5964#ffffff"
@@ -486,7 +493,7 @@
 /obj/item/storage/pill_bottle/alkysine
 	name = "alkysine pill bottle"
 	desc = "Contains pills that heal brain damage."
-	icon_state = "pill_canistertall"
+	icon_state = "pill_canistercomplete"
 	greyscale_config = /datum/greyscale_config/pillbottleround
 	pill_type_to_fill = /obj/item/reagent_containers/pill/alkysine
 	greyscale_colors = "#0292AC#ffffff"
@@ -498,14 +505,6 @@
 	pill_type_to_fill = /obj/item/reagent_containers/pill/imidazoline
 	greyscale_colors = "#F7A151#ffffff" //orange like carrots
 
-/obj/item/storage/pill_bottle/peridaxon
-	name = "peridaxon pill bottle"
-	desc = "Contains pills that suppress organ damage while waiting for a full treatment."
-	icon_state = "pill_canistertall"
-	greyscale_config = /datum/greyscale_config/pillbottleround
-	pill_type_to_fill = /obj/item/reagent_containers/pill/peridaxon
-	greyscale_colors = "#6e6860#ffffff"
-
 /obj/item/storage/pill_bottle/russian_red
 	name = "\improper Russian Red pill bottle"
 	desc = "Contains pills that heal all damage rapidly at the cost of small amounts of unhealable damage."
@@ -516,7 +515,7 @@
 /obj/item/storage/pill_bottle/quickclot
 	name = "quick-clot pill bottle"
 	desc = "Contains pills that suppress internal bleeding while waiting for full treatment."
-	icon_state = "pill_canistertall"
+	icon_state = "pill_canistercomplete"
 	greyscale_config = /datum/greyscale_config/pillbottleround
 	pill_type_to_fill = /obj/item/reagent_containers/pill/quickclot
 	greyscale_colors = "#5ed75e#ffffff"
@@ -531,7 +530,7 @@
 /obj/item/storage/pill_bottle/tricordrazine
 	name = "tricordrazine pill bottle"
 	desc = "Contains pills commonly used by untrained Squad Marines to avoid seeing their Squad Medic."
-	icon_state = "pill_canistertall"
+	icon_state = "pill_canistercomplete"
 	greyscale_config = /datum/greyscale_config/pillbottleround
 	pill_type_to_fill = /obj/item/reagent_containers/pill/tricordrazine
 	greyscale_colors = "#387d4b#ffffff"

@@ -181,7 +181,6 @@
 	new /obj/item/storage/pill_bottle/tramadol(src)
 	new /obj/item/storage/pill_bottle/tricordrazine(src)
 	new /obj/item/storage/pill_bottle/inaprovaline(src)
-	new /obj/item/storage/pill_bottle/peridaxon(src)
 	new /obj/item/reagent_containers/hypospray/autoinjector/combat(src)
 	new /obj/item/reagent_containers/hypospray/autoinjector/combat(src)
 	new /obj/item/reagent_containers/hypospray/autoinjector/combat(src)
@@ -215,8 +214,6 @@
 	. = ..()
 	new /obj/item/stack/medical/heal_pack/advanced/bruise_pack(src)
 	new /obj/item/stack/medical/heal_pack/advanced/bruise_pack(src)
-	new /obj/item/stack/medical/heal_pack/advanced/bruise_pack(src)
-	new /obj/item/stack/medical/heal_pack/advanced/burn_pack(src)
 	new /obj/item/stack/medical/heal_pack/advanced/burn_pack(src)
 	new /obj/item/stack/medical/heal_pack/advanced/burn_pack(src)
 	new /obj/item/stack/medical/splint(src)
@@ -228,8 +225,9 @@
 	new /obj/item/storage/pill_bottle/tramadol(src)
 	new /obj/item/storage/pill_bottle/tricordrazine(src)
 	new /obj/item/storage/pill_bottle/inaprovaline(src)
-	new /obj/item/storage/pill_bottle/peridaxon(src)
 	new /obj/item/storage/pill_bottle/quickclot(src)
+	new /obj/item/storage/pill_bottle/alkysine(src)
+	new /obj/item/storage/pill_bottle/imidazoline(src)
 	new /obj/item/reagent_containers/hypospray/autoinjector/combat(src)
 	new /obj/item/reagent_containers/hypospray/autoinjector/combat(src)
 	new /obj/item/reagent_containers/hypospray/autoinjector/dexalinplus(src)
@@ -251,7 +249,6 @@
 		/obj/item/reagent_containers/hypospray/autoinjector/inaprovaline,
 		/obj/item/reagent_containers/hypospray/autoinjector/spaceacillin,
 		/obj/item/reagent_containers/hypospray/autoinjector/hypervene,
-		/obj/item/reagent_containers/hypospray/autoinjector/peridaxon,
 		/obj/item/reagent_containers/hypospray/autoinjector/quickclot,
 	)
 
@@ -273,7 +270,6 @@
 	new /obj/item/reagent_containers/hypospray/autoinjector/inaprovaline(src)
 	new /obj/item/reagent_containers/hypospray/autoinjector/spaceacillin(src)
 	new /obj/item/reagent_containers/hypospray/autoinjector/hypervene(src)
-	new /obj/item/reagent_containers/hypospray/autoinjector/peridaxon(src)
 	new /obj/item/reagent_containers/hypospray/autoinjector/quickclot(src)
 
 /obj/item/storage/belt/combatLifesaver/upp
@@ -416,14 +412,6 @@
 	new /obj/item/ammo_magazine/rifle/tx8/incendiary(src)
 	new /obj/item/ammo_magazine/rifle/tx8/incendiary(src)
 	new /obj/item/ammo_magazine/rifle/tx8(src)
-
-/obj/item/storage/belt/marine/t25/Initialize()
-	. = ..()
-	new /obj/item/ammo_magazine/rifle/standard_smartrifle(src)
-	new /obj/item/ammo_magazine/rifle/standard_smartrifle(src)
-	new /obj/item/ammo_magazine/rifle/standard_smartrifle(src)
-	new /obj/item/ammo_magazine/rifle/standard_smartrifle(src)
-	new /obj/item/ammo_magazine/rifle/standard_smartrifle(src)
 
 /obj/item/storage/belt/marine/upp
 	name = "\improper Type 41 pattern load rig"
@@ -663,7 +651,6 @@
 	w_class = WEIGHT_CLASS_BULKY
 	storage_type_limits = list(
 		/obj/item/weapon/gun = 1,
-		/obj/item/cell/lasgun/lasrifle = 2,
 	)
 	storage_slots = 7
 	max_storage_space = 15
@@ -696,6 +683,13 @@
 	else
 		return ..()
 
+//Will only draw the specific holstered item, not ammo etc.
+/obj/item/storage/belt/gun/do_quick_equip()
+	if(!current_gun)
+		return FALSE
+	var/obj/item/W = current_gun
+	remove_from_storage(W, user = src)
+	return W
 
 /obj/item/storage/belt/gun/proc/update_gun_icon() //We do not want to use regular update_icon as it's called for every item inserted. Not worth the icon math.
 	var/mob/user = loc
@@ -745,7 +739,7 @@
 
 /obj/item/storage/belt/gun/pistol/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	to_chat(user, span_notice("To perform a reload with the amunition inside, disable right click and right click on the belt with an empty pistol."))
+	. += span_notice("To perform a reload with the amunition inside, disable right click and right click on the belt with an empty pistol.")
 
 /obj/item/storage/belt/gun/pistol/m4a3
 	name = "\improper M4A3 holster rig"
@@ -817,6 +811,13 @@
 	desc = "A belt with origins to old colony security holster rigs."
 	icon_state = "som_belt_pistol"
 	item_state = "som_belt_pistol"
+
+//No overlays, sprite not positioned to allow for it
+/obj/item/storage/belt/gun/pistol/m4a3/som/update_gun_icon()
+	if(current_gun)
+		playsound(src,drawSound, 15, 1)
+	else
+		playsound(src,sheatheSound, 15, 1)
 
 /obj/item/storage/belt/gun/pistol/stand
 	name = "\improper M276 pattern M4A3 holster rig"
@@ -955,8 +956,8 @@
 	INVOKE_ASYNC(src, .proc/handle_item_insertion, new_gun)
 
 /obj/item/storage/belt/gun/ts34
-	name = "\improper M276 pattern TS-34 shotgun holster rig"
-	desc = "A purpose built belt-holster assembly that holds a TS-34 shotgun and one shell box or 2 handfuls."
+	name = "\improper M276 pattern SH-34 shotgun holster rig"
+	desc = "A purpose built belt-holster assembly that holds a SH-34 shotgun and one shell box or 2 handfuls."
 	icon_state = "ts34_holster"
 	item_state = "ts34_holster"
 	max_w_class = 4 //So it can hold the shotgun.
